@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+import './answer.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  void answerquestion(){
-    print("i am the answer");
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var _questionNumber=0;
+
+  void _answerquestion(){
+    setState(() {
+      _questionNumber++;
+    });
+    print("i am the answer : " + _questionNumber.toString());
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var questions=[
@@ -21,10 +34,10 @@ class MyApp extends StatelessWidget {
       home:Scaffold(
       appBar: AppBar(title:Text('Quiz App')),
       body: Column(children: <Widget>[
-        Text("this is my text"),
-        RaisedButton(child: Text("Answer 1"),onPressed: answerquestion),
-        RaisedButton(child: Text("Answer 2"),onPressed: ()=> print("i am the question 2")),
-        RaisedButton(child: Text("Answer 3"),onPressed: ()=> print("i am the question 3")),
+        Question(questions[_questionNumber]),
+        Answer(_answerquestion),
+        Answer(_answerquestion),
+        Answer(_answerquestion),
       ],
      ),
     ),
